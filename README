@@ -1,0 +1,6 @@
+# Dotfiles
+
+My personal collection of dotfile config, helpful for getting up-to-date and ready to code on a new machine.
+
+Windows: install.cmd
+Linux:   install.sh
