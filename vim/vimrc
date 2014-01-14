@@ -1,8 +1,8 @@
 
 colorscheme torte
 
-set backupdir="%VIM_HOME%/backup"
-set directory="%VIM_HOME%/backup"
+set backupdir="%HOME%/vimfiles/backup"
+set directory="%HOME%/vimfiles/backup"
 
 set tabstop=4
 set shiftwidth=4
