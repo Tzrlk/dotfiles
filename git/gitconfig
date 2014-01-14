@@ -35,7 +35,7 @@
     ignored = ls-files -others -i -exclude-standard
     nuke = reset -hard HEAD
 [core]
-    excludesfile = "%HOME%/.gitignore"
+	excludesfile = ~/.gitignore
 [github]
     user = peterc@aetheric.co.nz
 [push]
