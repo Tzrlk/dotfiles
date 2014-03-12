@@ -7,6 +7,7 @@ colorscheme torte
 if isdirectory($HOME . '/.vim/backup') == 0
 	:silent !mkdir -p ~/vimfiles/backup >/dev/null 2>&1
 endif
+
 set backupdir-=.
 set backupdir+=.
 set backupdir-=~/
@@ -20,6 +21,7 @@ set backup
 if isdirectory($HOME . '/.vim/swap') == 0
 	:silent !mkdir -p ~/vimfiles/swap >/dev/null 2>&1
 endif
+
 set directory=./.vim-swap//
 set directory+=~/vimfiles/swap//
 set directory+=~/tmp//
@@ -36,10 +38,14 @@ if exists("+undofile")
 	if isdirectory($HOME . '/.vim/undo') == 0
 		:silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
 	endif
+
 	set undodir=./.vim-undo//
 	set undodir+=~/vimfiles/undo//
 	set undofile
 endif
+
+" Set line endings
+set fileformat=unix
 
 " Set character encoding
 set encoding=utf-8
@@ -69,5 +75,5 @@ set number
 execute pathogen#infect()
 
 syntax on
-" filetype plugin indent on
+filetype plugin indent on
 
