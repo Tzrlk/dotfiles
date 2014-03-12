@@ -29,10 +29,10 @@
     lg = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
     standup = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cD) %C(bold blue)<%an>%Creset' --since yesterday --author 'git config user.email'
     purr = pull --rebase
-    lol = log -graph -decorate -pretty=oneline -abbrev-commit
-    lola = lol -all
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    lola = lol --all
     yolo = 'git add -A && git commit -am "#YOLO" && git push origin master'
-    ignored = ls-files -others -i -exclude-standard
+    ignored = ls-files --others -i --exclude-standard
     nuke = reset -hard HEAD
 [core]
 	excludesfile = ~/.gitignore
