@@ -55,7 +55,7 @@ set fileencoding=utf-8
 set guifont=Lucida_Console:h10
 
 " Adding a column size
-set colorcolumn=80
+set colorcolumn=120
 
 " Managing tab size
 set tabstop=4
