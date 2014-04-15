@@ -1,0 +1,14 @@
+# Bash config
+
+# Export vars
+PS1='\n\w\n>'
+color_prompt=yes
+
+# HOME vars
+# None yet
+
+# PATH vars
+# None yet
+
+# Aliases
+#alias la=la -la
