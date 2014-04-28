@@ -17,6 +17,8 @@ rm -rf ~/.vim/bundle
 mkdir ~/.vim/bundle
 (cd ~/.vim/bundle && git clone git://github.com/digitaltoad/vim-jade.git)
 (cd ~/.vim/bundle && git clone https://github.com/pangloss/vim-javascript.git)
+(cd ~/.vim/bundle && git clone git@github.com:tpope/vim-markdown.git)
+(cd ~/.vim/bundle && git clone git@github.com:dagwieers/asciidoc-vim.git)
 
 # Set up git
 rm -f ~/.gitconfig ~/.gitignore
