@@ -1,0 +1,5 @@
+export GIT_SSH=~/local/bin/ssh-git
+#export GIT_AUTHOR_NAME="Peter Cummuskey"
+#export GIT_AUTHOR_EMAIL="peterc@aetheric.co.nz"
+#export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
+#export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL

@@ -4,6 +4,10 @@ echo '+ Updating bash config'
 rm -f ~/.bashrc
 cp bash/bashrc ~/.bashrc
 
+if [ -e /sdcard/Android ]; then
+	cat bash/bashrc_android >> ~/.bashrc
+fi
+
 echo '+ Updating vim config'
 rm -rf ~/.vimrc ~/.vim
 cp vim/vimrc ~/.vimrc

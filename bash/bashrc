@@ -11,4 +11,7 @@ color_prompt=yes
 # None yet
 
 # Aliases
-#alias la=la -la
+alias dir='ls -la'
+alias cls='clear'
+alias home='cd ~'
+
