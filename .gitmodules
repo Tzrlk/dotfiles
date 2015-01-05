@@ -4,3 +4,6 @@
 [submodule "vim/plugins/asciidoc"]
 	path = vim/plugins/asciidoc
 	url = git@github.com:dagwieers/asciidoc-vim.git
+[submodule "vim/pathogen"]
+	path = vim/pathogen
+	url = git@github.com:tpope/vim-pathogen.git

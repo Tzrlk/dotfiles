@@ -18,7 +18,7 @@ ECHO .
 
 ECHO Creating autoload directory and downloading pathogen.
 MKDIR "%USERPROFILE%\vimfiles\autoload"
-curl https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim > "%USERPROFILE%\vimfiles\autoload\pathogen.vim"
+COPY "vim\pathogen\autoload\pathogen.vim" "%USERPROFILE%\vimfiles\autoload\pathogen.vim"
 ECHO .
 
 ECHO Creating bundle directory.
