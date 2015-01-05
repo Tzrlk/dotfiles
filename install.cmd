@@ -22,6 +22,6 @@ curl https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathog
 ECHO .
 
 ECHO Creating bundle directory.
-MKDIR "%USERPROFILE%\vimfiles\bundle"
+MKLINK /J "%USERPROFILE%\vimfiles\bundle" "vim\plugins"
 ECHO .
 
