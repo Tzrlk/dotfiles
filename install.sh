@@ -1,16 +1,18 @@
 #!/bin/bash
 
+export DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/`dirname $0`
+
 echo '+ Updating bash config'
 rm -f ~/.bashrc
-cp bash/bashrc ~/.bashrc
+cp $DIR/bash/bashrc ~/.bashrc
 
 if [ -e /sdcard/Android ]; then
-	cat bash/bashrc_android >> ~/.bashrc
+	cat $DIR/bash/bashrc_android >> ~/.bashrc
 fi
 
 echo '+ Updating vim config'
 rm -rf ~/.vimrc ~/.vim
-cp vim/vimrc ~/.vimrc
+cp $DIR/vim/vimrc ~/.vimrc
 
 echo '+ Making sure pathogen is set up right.'
 
@@ -33,6 +35,6 @@ echo '+ Downloading plugins'
 
 echo '+ Updating git config'
 rm -f ~/.gitconfig ~/.gitignore
-cp git/gitconfig ~/.gitconfig
-cp git/gitignore ~/.gitignore
+cp $DIR/git/gitconfig ~/.gitconfig
+cp $DIR/git/gitignore ~/.gitignore
 
