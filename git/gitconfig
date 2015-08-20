@@ -33,9 +33,11 @@
 	ignored = ls-files --others -i --exclude-standard
 	nuke = reset --hard HEAD
 	fap = fetch --all --prune
+	undo = reset HEAD@{1}
 [core]
 	excludesfile = ~/.gitignore
 	editor = 'C:/Program Files (x86)/Vim/vim74/gvim.exe' -f
+	autocrlf = Input
 [github]
 	user = peterc@aetheric.co.nz
 [push]
@@ -43,17 +45,18 @@
 [http]
 	sslVerify = false
 	postBuffer = 524288000
-[difftool "sourcetree"]
-	cmd = 'C:/Program Files/TortoiseSVN/bin/TortoiseMerge.exe' \"$LOCAL\" \"$REMOTE\"
-[mergetool "sourcetree"]
-	cmd = 'C:/Program Files/TortoiseSVN/bin/TortoiseMerge.exe'  -base:\"$BASE\" -mine:\"$LOCAL\" -theirs:\"$REMOTE\" -merged:\"$MERGED\"
-	trustExitCode = true
 [difftool "intellij"]
-	cmd = cmd.exe //c "%IDEA_HOME%/bin/idea.bat diff \"$LOCAL\" \"$REMOTE\""
+	cmd = cmd.exe //c "\"C:/Program Files (x86)/Jetbrains/IntelliJ IDEA 14.1.4/bin/idea.bat\" diff \"$LOCAL\" \"$REMOTE\""
+	trustExitCode = true
 [mergetool "intellij"]
-	cmd = cmd.exe //c "%IDEA_HOME%/bin/idea.bat merge \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\""
+	cmd = cmd.exe //c "\"C:/Program Files (x86)/Jetbrains/IntelliJ IDEA 14.1.4/bin/idea.bat\" merge \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\""
 	trustExitCode = true
 [diff]
 	tool = intellij
+	guitool = intellij
 [merge]
 	tool = intellij
+[i18n]
+	filesEncoding = utf-8
+[mergetool]
+	keepBackup = false
