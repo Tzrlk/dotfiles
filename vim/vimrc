@@ -1,48 +1,86 @@
 
+set nocompatible | filetype indent plugin on | syntax on
 colorscheme torte
 
-" Save your backups to a less annoying place than the current directory.
-" If you have .vim-backup in the current directory, it'll use that.
-" Otherwise it saves it to ~/.vim/backup or . if all else fails.
-if isdirectory($HOME . '/.vim/backup') == 0
-	:silent !mkdir -p ~/vimfiles/backup >/dev/null 2>&1
+if has("win32")
+	let s:vimdir = expand($HOME . '/vimfiles')
+else
+	let s:vimdir = expand($HOME . "/.vim")
 endif
 
-set backupdir-=.
-set backupdir+=.
-set backupdir-=~/
-set backupdir^=~/vimfiles/backup/
-set backupdir^=./.vim-backup/
-set backup
+set runtimepath=s:vimdir,$VIMRUNTIME
 
-" Save your swp files to a less annoying place than the current directory.
-" If you have .vim-swap in the current directory, it'll use that.
-" Otherwise it saves it to ~/.vim/swap, ~/tmp or .
-if isdirectory($HOME . '/.vim/swap') == 0
-	:silent !mkdir -p ~/vimfiles/swap >/dev/null 2>&1
-endif
+fun! SetupVAM()
 
-set directory=./.vim-swap//
-set directory+=~/vimfiles/swap//
-set directory+=~/tmp//
-set directory+=.
+	let c = get(g:, 'vim_addon_manager', {})
+	let g:vim_addon_manager = c
+	let c.plugin_root_dir = expand(s:vimdir . '/vim-addons')
+	let s:vamdir = expand(c.plugin_root_dir . '/vim-addon-manager')
+	let &rtp.=(empty(&rtp)?'':',') . s:vamdir
+	let vam_autoload_dir = expand(s:vamdir . '/autoload')
 
-" viminfo stores the the state of your previous editing session
-set viminfo+=n~/vimfiles/viminfo
-
-if exists("+undofile")
-	" undofile - This allows you to use undos after exiting and restarting
-	" This, like swap and backups, uses .vim-undo first, then ~/.vim/undo
-	" :help undo-persistence
-	" This is only present in 7.3+
-	if isdirectory($HOME . '/.vim/undo') == 0
-		:silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
+	if !isdirectory(vam_autoload_dir)
+		silent execute '!git clone --depth=1 git@github.com:MarcWeber/vim-addon-manager.git '
+				\       shellescape(s:vamdir, 1)
 	endif
 
-	set undodir=./.vim-undo//
-	set undodir+=~/vimfiles/undo//
-	set undofile
-endif
+	call vam#ActivateAddons([])
+
+endfun
+
+call SetupVAM()
+
+VAMActivate git:git@github.com:devyn/lojban.vim.git
+VAMActivate git:git@github.com:elzr/vim-json.git
+
+fun! SetupBackups()
+
+	if !isdirectory(s:vimdir)
+		echo 'Creating ' . s:vimdir
+		silent execute '!mkdir ' . s:vimdir
+	endif
+
+	" Save your backups to a less annoying place than the current directory.
+	let s:backupdir = expand(s:vimdir . '/backup')
+	if !isdirectory(s:backupdir)
+		echo 'Creating ' . s:backupdir
+		silent execute '!mkdir ' . s:backupdir
+	endif
+
+	let &backupdir = expand(s:backupdir . '//')
+	set backup
+
+	" Save your swp files to a less annoying place than the current directory.
+	let s:swapdir = expand(s:vimdir . '/swap')
+	if isdirectory(s:swapdir) == 0
+		echo 'Creating ' . s:swapdir
+		silent execute '!mkdir ' . s:swapdir
+	endif
+
+	let &directory = expand(s:swapdir . '//')
+
+	" viminfo stores the the state of your previous editing session
+	let &viminfo .= ',n' . expand(s:vimdir . '/viminfo')
+
+	if exists("+undofile")
+
+		" undofile - This allows you to use undos after exiting and restarting
+		" :help undo-persistence
+		" This is only present in 7.3+
+		let s:undodir = expand(s:vimdir . '/undo')
+		if isdirectory(s:undodir) == 0
+			echo 'Creating ' . s:undodir
+			silent execute '!mkdir ' . s:undodir
+		endif
+
+		let &undodir = expand(s:undodir . '//')
+		set undofile
+
+	endif
+
+endfun
+
+call SetupBackups()
 
 " Set line endings
 set fileformat=unix
@@ -73,9 +111,4 @@ set backspace=indent,eol,start
 
 " Showing line numbers
 set number
-
-execute pathogen#infect()
-
-syntax on
-filetype plugin indent on
 
