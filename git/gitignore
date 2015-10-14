@@ -1,4 +1,7 @@
 *.swp
 *.swo
 *~
-install.cmd
+*.iml
+.idea/
+*.iws
+*.ipr

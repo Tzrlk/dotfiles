@@ -20,20 +20,13 @@
 	changed = yellow
 	untracked = red
 [alias]
-	st = status -sb
-	ci = commit
-	br = branch
 	co = checkout
-	df = diff
-	ready = rebase -i @{u}
-	lg = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-	standup = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cD) %C(bold blue)<%an>%Creset' --since yesterday --author 'git config user.email'
 	logr = log --graph --decorate --oneline --abbrev-commit
 	logra = log --graph --decorate --oneline --abbrev-commit --all
 	ignored = ls-files --others -i --exclude-standard
 	nuke = reset --hard HEAD
 	fap = fetch --all --prune
-	undo = reset HEAD@{1}
+	amend = !git commit --amend -m`git log --format=%B -n 1 HEAD`
 [core]
 	excludesfile = ~/.gitignore
 	editor = 'C:/Program Files (x86)/Vim/vim74/gvim.exe' -f
@@ -45,18 +38,27 @@
 [http]
 	sslVerify = false
 	postBuffer = 524288000
-[difftool "intellij"]
-	cmd = cmd.exe //c "\"C:/Program Files (x86)/Jetbrains/IntelliJ IDEA 14.1.4/bin/idea.bat\" diff \"$LOCAL\" \"$REMOTE\""
-	trustExitCode = true
-[mergetool "intellij"]
-	cmd = cmd.exe //c "\"C:/Program Files (x86)/Jetbrains/IntelliJ IDEA 14.1.4/bin/idea.bat\" merge \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\""
-	trustExitCode = true
-[diff]
-	tool = intellij
-	guitool = intellij
-[merge]
-	tool = intellij
+	proxy = http://auksquid2.bravurasolutions.local:3128
+[difftool "kdiff3"]
+	path = C:/Program Files/KDiff3/kdiff3.exe
 [i18n]
 	filesEncoding = utf-8
 [mergetool]
 	keepBackup = false
+[https]
+[merge]
+	tool = meld
+[mergetool "kdiff3"]
+	path = C:/Program Files/KDiff3/kdiff3.exe
+[diff]
+	guitool = meld
+[https]
+[https]
+[https]
+[https]
+[https]
+[https]
+[https]
+[https]
+[https]
+	proxy = http://auksquid2.bravurasolutions.local:3128
