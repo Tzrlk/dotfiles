@@ -27,10 +27,13 @@
 	nuke = reset --hard HEAD
 	fap = fetch --all --prune
 	amend = !git commit --amend -m`git log --format=%B -n 1 HEAD`
+	cli = !gcli
 [core]
 	excludesfile = ~/.gitignore
-	editor = 'C:/Program Files (x86)/Vim/vim74/gvim.exe' -f
+	editor = 'C:/Program Files (x86)/vim/vim80/gvim.exe' -f
 	autocrlf = Input
+[credential]
+	helper = wincred
 [github]
 	user = peterc@aetheric.co.nz
 [push]
@@ -45,20 +48,11 @@
 	filesEncoding = utf-8
 [mergetool]
 	keepBackup = false
-[https]
 [merge]
 	tool = meld
 [mergetool "kdiff3"]
 	path = C:/Program Files/KDiff3/kdiff3.exe
 [diff]
 	guitool = meld
-[https]
-[https]
-[https]
-[https]
-[https]
-[https]
-[https]
-[https]
 [https]
 	proxy = http://auksquid2.bravurasolutions.local:3128
