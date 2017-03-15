@@ -10,28 +10,7 @@ endif
 
 set runtimepath=s:vimdir,$VIMRUNTIME
 
-fun! SetupVAM()
-
-	let c = get(g:, 'vim_addon_manager', {})
-	let g:vim_addon_manager = c
-	let c.plugin_root_dir = expand(s:vimdir . '/vim-addons')
-	let s:vamdir = expand(c.plugin_root_dir . '/vim-addon-manager')
-	let &rtp.=(empty(&rtp)?'':',') . s:vamdir
-	let vam_autoload_dir = expand(s:vamdir . '/autoload')
-
-	if !isdirectory(vam_autoload_dir)
-		silent execute '!git clone --depth=1 git@github.com:MarcWeber/vim-addon-manager.git '
-				\       shellescape(s:vamdir, 1)
-	endif
-
-	call vam#ActivateAddons([])
-
-endfun
-
-call SetupVAM()
-
-VAMActivate git:git@github.com:devyn/lojban.vim.git
-VAMActivate git:git@github.com:elzr/vim-json.git
+"==============================================================================
 
 fun! SetupBackups()
 
@@ -82,6 +61,55 @@ endfun
 
 call SetupBackups()
 
+"==============================================================================
+
+fun! SetupVAM()
+
+	let c = get(g:, 'vim_addon_manager', {})
+	let g:vim_addon_manager = c
+	let c.plugin_root_dir = expand(s:vimdir . '/vim-addons')
+	let s:vamdir = expand(c.plugin_root_dir . '/vim-addon-manager')
+	let &rtp.=(empty(&rtp)?'':',') . s:vamdir
+	let vam_autoload_dir = expand(s:vamdir . '/autoload')
+
+	if !isdirectory(vam_autoload_dir)
+		silent execute '!git clone --depth=1 https://github.com/MarcWeber/vim-addon-manager.git '
+				\       shellescape(s:vamdir, 1)
+	endif
+
+	call vam#ActivateAddons([])
+
+endfun
+
+call SetupVAM()
+
+"==============================================================================
+
+VAMActivate git:https://github.com/godlygeek/tabular.git
+" VAMActivate git:https://github.com/editorconfig/editorconfig-vim.git
+" VAMActivate git:git@github.com:valloric/youcompleteme.git
+
+fun! TypePlugin(type, repo)
+	au FileType ${type} VAMActivate git:https://github.com/${repo}.git
+endfun
+
+" Syntax extension mappings
+au BufNewFile,BufRead *.adoc set filetype=asciidoc
+au BufNewFile,BufRead *.df   set filetype=dockerfile
+au BufNewFile,BufRead *.rs   set filetype=rust
+au BufNewFile,BufRead *.nix  set filetype=nixos
+au FileType yaml setl sw=2 sts=2 et
+
+" Filetype specific plugins
+call TypePlugin('lojban',   'devyn/lojban.vim')
+call TypePlugin('json',     'elzr/vim-json')
+call TypePlugin('puppet',   'rodjek/vim-puppet')
+call TypePlugin('rust',     'rust-lang/rust.vim')
+call TypePlugin('nixos',    'marcweber/vim-addon-nix')
+call TypePlugin('asciidoc', 'asciidoc/vim-asciidoc')
+
+"==============================================================================
+
 " Set line endings
 set fileformat=unix
 
@@ -94,8 +122,8 @@ set guifont=Lucida_Console:h10
 
 " Adding a column size
 set colorcolumn=80
-set textwidth=78
-set formatoptions+=t
+"set textwidth=78
+"set formatoptions+=t
 
 " Managing tab size
 set tabstop=4
