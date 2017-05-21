@@ -98,15 +98,18 @@ au BufNewFile,BufRead *.adoc set filetype=asciidoc
 au BufNewFile,BufRead *.df   set filetype=dockerfile
 au BufNewFile,BufRead *.rs   set filetype=rust
 au BufNewFile,BufRead *.nix  set filetype=nixos
+au BufNewFile,BufRead *.ps1  set filetype=powershell
+
 au FileType yaml setl sw=2 sts=2 et
 
 " Filetype specific plugins
-call TypePlugin('lojban',   'devyn/lojban.vim')
-call TypePlugin('json',     'elzr/vim-json')
-call TypePlugin('puppet',   'rodjek/vim-puppet')
-call TypePlugin('rust',     'rust-lang/rust.vim')
-call TypePlugin('nixos',    'marcweber/vim-addon-nix')
-call TypePlugin('asciidoc', 'asciidoc/vim-asciidoc')
+au FileType lojban     VAMActivate git:https://github.com/devyn/lojban.vim.git
+au FileType json       VAMActivate git:https://github.com/elzr/vim-json.git
+au FileType puppet     VAMActivate git:https://github.com/rodjek/vim-puppet.git
+au FileType rust       VAMActivate git:https://github.com/rust-lang/rust.vim.git
+au FileType nixos      VAMActivate git:https://github.com/marcweber/vim-addon-nix.git
+au FileType asciidoc   VAMActivate git:https://github.com/asciidoc/vim-asciidoc.git
+au FileType powershell VAMActivate git:https://github.com/PProvost/vim-ps1.git
 
 "==============================================================================
 

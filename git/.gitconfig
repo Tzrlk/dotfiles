@@ -38,21 +38,42 @@
 	user = peterc@aetheric.co.nz
 [push]
 	default = tracking
+[url "https://"]
+	insteadOf = git://
+[url "https://github.com/"]
+	insteadOf = git@github.com:
 [http]
 	sslVerify = false
 	postBuffer = 524288000
-	proxy = http://auksquid2.bravurasolutions.local:3128
-[difftool "kdiff3"]
-	path = C:/Program Files/KDiff3/kdiff3.exe
 [i18n]
 	filesEncoding = utf-8
+
+[difftool]
+	tool = vimdiff3
+	external = meld
+	guitool = meld
+[difftool "p4merge"]
+	path = "C:/Program Files (x86)/Perforce"
+	cmd  = p4merge "$BASE" "$LOCAL" "$REMOTE"
+[difftool "meld"]
+	path = "C:/Program Files (x86)/Meld"
+	cmd  = meld "$LOCAL" "$REMOTE"
+
+[merge]
+	tool = vimdiff3
+	external = meld
+	guitool = meld
+[mergetool "p4merge"]
+	path = "C:/Program Files (x86)/Perforce"
+	cmd  = p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+[mergetool "meld"]
+	path = "C:/Program Files (x86)/Meld/Meld.exe"
+	cmd  = meld "$LOCAL" "$REMOTE" "$MERGED"
 [mergetool]
 	keepBackup = false
-[merge]
-	tool = meld
-[mergetool "kdiff3"]
-	path = C:/Program Files/KDiff3/kdiff3.exe
-[diff]
-	guitool = meld
-[https]
-	proxy = http://auksquid2.bravurasolutions.local:3128
+
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
