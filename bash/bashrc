@@ -1,8 +1,8 @@
 # Bash config
 
 # Export vars
-PS1='\n\w\n>'
-color_prompt=yes
+#PS1='\n\w\n>'
+#color_prompt=yes
 
 # HOME vars
 # None yet
@@ -14,4 +14,6 @@ color_prompt=yes
 alias dir='ls -la'
 alias cls='clear'
 alias home='cd ~'
+
+[[ $- = *i* ]] && source ~/bashrc.d/liquidprompt/liquidprompt
 
