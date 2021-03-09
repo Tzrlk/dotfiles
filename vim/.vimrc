@@ -88,28 +88,34 @@ call SetupVAM()
 VAMActivate git:https://github.com/godlygeek/tabular.git
 " VAMActivate git:https://github.com/editorconfig/editorconfig-vim.git
 " VAMActivate git:git@github.com:valloric/youcompleteme.git
+VAMActivate git:https://github.com/powerman/vim-plugin-AnsiEsc.git
 
 fun! TypePlugin(type, repo)
 	au FileType ${type} VAMActivate git:https://github.com/${repo}.git
 endfun
 
 " Syntax extension mappings
-au BufNewFile,BufRead *.adoc set filetype=asciidoc
-au BufNewFile,BufRead *.df   set filetype=dockerfile
-au BufNewFile,BufRead *.rs   set filetype=rust
-au BufNewFile,BufRead *.nix  set filetype=nixos
-au BufNewFile,BufRead *.ps1  set filetype=powershell
+au BufNewFile,BufRead *.adoc  set filetype=asciidoc
+au BufNewFile,BufRead *.df    set filetype=dockerfile
+au BufNewFile,BufRead *.rs    set filetype=rust
+au BufNewFile,BufRead *.nix   set filetype=nixos
+au BufNewFile,BufRead *.pcgen set filetype=pcgen
+au BufNewFile,BufRead *.ps1   set filetype=ps1
+
+autocmd BufNewFile,BufReadPost *.ps1 set filetype=ps1
 
 au FileType yaml setl sw=2 sts=2 et
 
 " Filetype specific plugins
-au FileType lojban     VAMActivate git:https://github.com/devyn/lojban.vim.git
-au FileType json       VAMActivate git:https://github.com/elzr/vim-json.git
-au FileType puppet     VAMActivate git:https://github.com/rodjek/vim-puppet.git
-au FileType rust       VAMActivate git:https://github.com/rust-lang/rust.vim.git
-au FileType nixos      VAMActivate git:https://github.com/marcweber/vim-addon-nix.git
-au FileType asciidoc   VAMActivate git:https://github.com/asciidoc/vim-asciidoc.git
-au FileType powershell VAMActivate git:https://github.com/PProvost/vim-ps1.git
+au FileType lojban   VAMActivate git:https://github.com/devyn/lojban.vim.git
+au FileType json     VAMActivate git:https://github.com/elzr/vim-json.git
+au FileType puppet   VAMActivate git:https://github.com/rodjek/vim-puppet.git
+au FileType rust     VAMActivate git:https://github.com/rust-lang/rust.vim.git
+au FileType nixos    VAMActivate git:https://github.com/marcweber/vim-addon-nix.git
+au FileType asciidoc VAMActivate git:https://github.com/asciidoc/vim-asciidoc.git
+au FileType ps1      VAMActivate git:https://github.com/PProvost/vim-ps1.git
+au FileType xml      VAMActivate git:https://github.com/othree/xml.vim.git
+au FileType pcgen    VAMActivate git:https://github.com/PCGen/vim-pcgen.git
 
 "==============================================================================
 

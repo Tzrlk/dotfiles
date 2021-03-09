@@ -20,21 +20,91 @@
 	changed = yellow
 	untracked = red
 [alias]
+
+	# Quick shortcuts
+	st = status -s
+	cl = clone
+	ci = commit
 	co = checkout
-	logr = log --graph --decorate --oneline --abbrev-commit
-	logra = log --graph --decorate --oneline --abbrev-commit --all
+	br = branch
+	dw = diff --word-diff
+	dc = diff --cached
+	rs = reset
+
+	logr  = log --graph --decorate --oneline --abbrev-commit
+	logra = !git logr --all
+
+	# List commits in short form, with colors and branch/tag annotations
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+
+	# List commits showing changed files is invoked with git ll
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+
+	# List oneline commits showing dates
+	lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+
+	# List oneline commits showing relative dates
+	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+
+	# Show the history of a file, with diffs
+	lf = log -u
+
+	# Show modified files in last commit
+	dl = "!git ll -1"
+
+	# Show a diff last commit
+	dlc = diff --cached HEAD^
+
+	# Show content (full diff) of a commit given a revision
+	dr  = "!f() { git diff "$1"^.."$1"; }; f"
+	lc  = "!f() { git ll "$1"^.."$1"; }; f"
+	diffr  = "!f() { git diff "$1"^.."$1"; }; f"
+
+	# Find a file path in codebase
+	find = "!git ls-files | grep -i"
+
+	# Search/grep your entire codebase for a string
+	grep = grep -Ii
+
+	# Grep from root folder
+	gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
+
+	# List all your Aliases
+	la = "!git config -l | grep alias | cut -c 7-"
+
+	# Show the last tag
+	lt = describe --tags --abbrev=0
+
+	# Merge aliases
+	mours = "!f() { git co --ours $@ && git add $@; }; f"
+	mtheirs = "!f() { git co --theirs $@ && git add $@; }; f"
+
+	# Lists all ignored files.
 	ignored = ls-files --others -i --exclude-standard
+
+	# Does a hard reset
 	nuke = reset --hard HEAD
+
+	# Fetches latest changes
 	fap = fetch --all --prune
-	amend = !git commit --amend -m`git log --format=%B -n 1 HEAD`
+
+	# Amends the currently staged content to the last commit with the same msg 
+	amend = !git commit --amend -m \"`git log --format=%B -n 1 HEAD`\"
+
+	# Starts the git cli
 	cli = !gcli
+
+	# Executes a command in the git root
+	run = '!exec
+
 [core]
-	excludesfile = ~/.gitignore
 	editor = 'C:/Program Files (x86)/vim/vim80/gvim.exe' -f
 	autocrlf = Input
 [credential]
 	helper = wincred
 [github]
+	user = peterc@aetheric.co.nz
+[bitbucket]
 	user = peterc@aetheric.co.nz
 [push]
 	default = tracking
@@ -42,6 +112,8 @@
 	insteadOf = git://
 [url "https://github.com/"]
 	insteadOf = git@github.com:
+[url "https://bitbucket.org/"]
+	insteadOf = git@bitbucket.org:
 [http]
 	sslVerify = false
 	postBuffer = 524288000
@@ -53,22 +125,19 @@
 	external = meld
 	guitool = meld
 [difftool "p4merge"]
-	path = "C:/Program Files (x86)/Perforce"
-	cmd  = p4merge "$BASE" "$LOCAL" "$REMOTE"
+	path = "C:/Program Files (x86)/Perforce/p4merge.exe"
 [difftool "meld"]
-	path = "C:/Program Files (x86)/Meld"
-	cmd  = meld "$LOCAL" "$REMOTE"
+	path = "C:/Program Files (x86)/Meld/Meld.exe"
 
 [merge]
 	tool = vimdiff3
 	external = meld
 	guitool = meld
+	ff = false
 [mergetool "p4merge"]
-	path = "C:/Program Files (x86)/Perforce"
-	cmd  = p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+	path = "C:/Program Files (x86)/Perforce/p4merge.exe"
 [mergetool "meld"]
 	path = "C:/Program Files (x86)/Meld/Meld.exe"
-	cmd  = meld "$LOCAL" "$REMOTE" "$MERGED"
 [mergetool]
 	keepBackup = false
 
@@ -77,3 +146,9 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+[diff]
+	algorithm = histogram
+[diff "sopsdiffer"]
+	textconv = sops -d
+[log]
+	date = iso-local
