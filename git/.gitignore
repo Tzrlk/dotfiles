@@ -1,7 +1,20 @@
+# Misc
+.temp/
+*.bak
+*.backup
+
+# Logging
+*.jsonl
+*.log
+
+# Vim
 *.swp
 *.swo
 *~
+
+# IntelliJ
+.idea/*
 *.iml
-.idea/
 *.iws
 *.ipr
+
