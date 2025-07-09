@@ -127,10 +127,10 @@ set encoding=utf-8
 set fileencoding=utf-8
 
 " Setting the font.
-set guifont=Lucida_Console:h10
+"set guifont=Lucida_Console:h10
 
 " Adding a column size
-set colorcolumn=80
+"set colorcolumn=80
 "set textwidth=78
 "set formatoptions+=t
 
